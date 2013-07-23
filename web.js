@@ -1,7 +1,13 @@
 var express = require('express');
 var fs = require('fs');
+var path = require('path');
 
 var app = express.createServer(express.logger());
+
+app.configure(function(){
+  app.use(app.router);
+  app.use('/image', express.static(path.join(__dirname, 'image')));
+});
 
 app.get('/', function(request, response) {
   var data;
